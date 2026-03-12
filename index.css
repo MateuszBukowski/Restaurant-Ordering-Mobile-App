@@ -1,3 +1,30 @@
 body {
     margin: 0;
+    text-align: center;
 } 
+
+#banner {
+    width: 600px;
+    height: 167px;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-properties {
+    display: flex;
+}
+
+#orders {
+    display: none;
+}
+
+#modal-payment-form {
+    display: none;
+}
+
+#summary {
+    display: none;
+}
