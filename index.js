@@ -6,7 +6,6 @@ const modalPaymentForm = document.getElementById('modal-payment-form')
 const summary = document.getElementById('summary')
 
 let productBasket = []
-let totalPrice = 0
 
 document.addEventListener('click', function(e){
     const orderList = document.getElementById('order-list')
@@ -43,6 +42,7 @@ function getProducts(){
 }
 
 function getOrders(){
+    let totalPrice = 0
     let ordersHtml = "" 
     productBasket.forEach(productOrder => {
         ordersHtml += `        
