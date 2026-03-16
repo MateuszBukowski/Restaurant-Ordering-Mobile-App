@@ -7,41 +7,22 @@ const summary = document.getElementById('summary')
 
 let productBasket = []
 let totalPrice = 0
-console.log(`totalPrice = ${totalPrice}`)
 
 document.addEventListener('click', function(e){
     const orderList = document.getElementById('order-list')
     switch(String(e.target.id)){
         case '0':
-            orderList.innerHTML += addProductToOrder(e.target.id)
+            productBasket.push(menuArray[e.target.id])
             break
         case '1':
-            orderList.innerHTML  += addProductToOrder(e.target.id)
+            productBasket.push(menuArray[e.target.id])
             break
         case '2':
-            orderList.innerHTML  += addProductToOrder(e.target.id)
+            productBasket.push(menuArray[e.target.id])
             break
     }
+    render()
 })
-
-function addProductToOrder(productId){
-    const productIdNum = Number(productId)
-    orders.style.display = 'flex'
-    let resultHtml = ""
-    menuArray.forEach(product => {
-        if (product.id === productIdNum){
-            resultHtml = `
-            <p>${product.name}</p>
-            <button class="remove-btn">remove</button>
-            <p>${product.price}</p>
-            `      
-        totalPrice += Number(product.price)
-        console.log(`totalPrice = ${totalPrice}`)
-        productBasket.push(product)
-        }
-    })
-    return resultHtml
-}
 
 function getProducts(){
     let resultHtml = ""
@@ -62,10 +43,21 @@ function getProducts(){
 }
 
 function getOrders(){
-    let resultHtml = ""
-    resultHtml = `
+    let ordersHtml = "" 
+    productBasket.forEach(productOrder => {
+        ordersHtml += `        
+        <p>${productOrder.name}</p>
+        <button class="remove-btn">remove</button>
+        <p>${productOrder.price}</p>
+        `
+        totalPrice += Number(productOrder.price)
+    })
+    if (productBasket.length > 0) {
+        orders.style.display = 'flex'
+    }
+    const resultHtml = `
         <p>Your Order</p>
-        <div id="order-list"></div>
+        ${ordersHtml}}
         <hr>
         <p>In Total:</p>
         <p>${totalPrice}</p>
