@@ -5,16 +5,21 @@ const orders = document.getElementById('orders')
 const modalPaymentForm = document.getElementById('modal-payment-form')
 const summary = document.getElementById('summary')
 
+let productBasket = []
+let totalPrice = 0
+console.log(`totalPrice = ${totalPrice}`)
+
 document.addEventListener('click', function(e){
+    const orderList = document.getElementById('order-list')
     switch(String(e.target.id)){
         case '0':
-            orders.innerHTML =+ addProductToOrder(e.target.id)
+            orderList.innerHTML += addProductToOrder(e.target.id)
             break
         case '1':
-            orders.innerHTML  =+ addProductToOrder(e.target.id)
+            orderList.innerHTML  += addProductToOrder(e.target.id)
             break
         case '2':
-            orders.innerHTML  =+ addProductToOrder(e.target.id)
+            orderList.innerHTML  += addProductToOrder(e.target.id)
             break
     }
 })
@@ -23,14 +28,16 @@ function addProductToOrder(productId){
     const productIdNum = Number(productId)
     orders.style.display = 'flex'
     let resultHtml = ""
-    menuArray.forEach(element => {
-        console.log(element.id + "(" + typeof(element.id) + ")" + " vs " + productIdNum + "(" + typeof(productIdNum) + ") = "+ (element.id === productIdNum))
-        if (element.id === productIdNum){
+    menuArray.forEach(product => {
+        if (product.id === productIdNum){
             resultHtml = `
-            <p>${element.name}</p>
+            <p>${product.name}</p>
             <button class="remove-btn">remove</button>
-            <p>${element.price}</p>
-        `
+            <p>${product.price}</p>
+            `      
+        totalPrice += Number(product.price)
+        console.log(`totalPrice = ${totalPrice}`)
+        productBasket.push(product)
         }
     })
     return resultHtml
@@ -57,15 +64,12 @@ function getProducts(){
 function getOrders(){
     let resultHtml = ""
     resultHtml = `
-        <div class="orders">
         <p>Your Order</p>
-        <p>ORDER LIST</p>
-        <p>ORDER PRICE</p>
+        <div id="order-list"></div>
         <hr>
-        <p>In Total: </p>
-        <p>PRICE</p>
+        <p>In Total:</p>
+        <p>${totalPrice}</p>
         <button class="green-btn">Complete Order</button>
-        </div>
     `
     return resultHtml
 }
@@ -97,7 +101,7 @@ function getSummary(){
 
 function render(){
     products.innerHTML = getProducts()
-    orders.innerHTML = getModalPayment()
+    orders.innerHTML = getOrders()
     modalPaymentForm.innerHTML = getModalPaymentForm()
     summary.innerHTML = getSummary()
 }
