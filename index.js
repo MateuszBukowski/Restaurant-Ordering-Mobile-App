@@ -5,6 +5,37 @@ const orders = document.getElementById('orders')
 const modalPaymentForm = document.getElementById('modal-payment-form')
 const summary = document.getElementById('summary')
 
+document.addEventListener('click', function(e){
+    switch(String(e.target.id)){
+        case '0':
+            orders.innerHTML =+ addProductToOrder(e.target.id)
+            break
+        case '1':
+            orders.innerHTML  =+ addProductToOrder(e.target.id)
+            break
+        case '2':
+            orders.innerHTML  =+ addProductToOrder(e.target.id)
+            break
+    }
+})
+
+function addProductToOrder(productId){
+    const productIdNum = Number(productId)
+    orders.style.display = 'flex'
+    let resultHtml = ""
+    menuArray.forEach(element => {
+        console.log(element.id + "(" + typeof(element.id) + ")" + " vs " + productIdNum + "(" + typeof(productIdNum) + ") = "+ (element.id === productIdNum))
+        if (element.id === productIdNum){
+            resultHtml = `
+            <p>${element.name}</p>
+            <button class="remove-btn">remove</button>
+            <p>${element.price}</p>
+        `
+        }
+    })
+    return resultHtml
+}
+
 function getProducts(){
     let resultHtml = ""
     menuArray.forEach(element => {
@@ -16,17 +47,17 @@ function getProducts(){
                 <p>${element.ingredients}</p>
                 <p>${element.price}</p>
             </div>
-            <button class="plus-btn">+</button>
+            <button class="plus-btn" id="${element.id}">+</button>
             <hr>
         </div>`
-    });
+    })
     return resultHtml
 }
 
-function getModalPayment(){
+function getOrders(){
     let resultHtml = ""
     resultHtml = `
-        <div class="modal-payment">
+        <div class="orders">
         <p>Your Order</p>
         <p>ORDER LIST</p>
         <p>ORDER PRICE</p>
@@ -39,7 +70,7 @@ function getModalPayment(){
     return resultHtml
 }
 
-function getPaymentForm(){
+function getModalPaymentForm(){
     let resultHtml = ""
     resultHtml = `
         <p>Enter Card Details</p>
@@ -67,7 +98,7 @@ function getSummary(){
 function render(){
     products.innerHTML = getProducts()
     orders.innerHTML = getModalPayment()
-    modalPaymentForm.innerHTML = getPaymentForm()
+    modalPaymentForm.innerHTML = getModalPaymentForm()
     summary.innerHTML = getSummary()
 }
 
