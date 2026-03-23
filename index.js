@@ -139,12 +139,14 @@ function payOrder(){
     })
 
     console.log(paymentData)
+
+    summary.style.display = 'flex'
 }
 
 function getSummary(){
     let resultHtml = ""
     resultHtml = `
-        <p>Thanks NAME! Your order is on its way!</p>
+        <p>Thanks ${paymentData[0].fullName}! Your order is on its way!</p>
     `
     return resultHtml
 }
