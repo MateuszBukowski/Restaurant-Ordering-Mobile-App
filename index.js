@@ -36,7 +36,6 @@ document.addEventListener('click', function(e){
             payOrder()
             break
     }
-    // console.log(String(e.target.id))
     render()
 })
 
@@ -102,8 +101,8 @@ function getModalPaymentForm(){
                 type="text" 
                 name="full-name" 
                 id="full-name" 
-                pattern="[a-zA-Z0-9]+\s[a-zA-Z0-9]+$"
-                minlenth="2"
+                pattern="^[A-Za-z]+ [A-Za-z]+$"
+                title="Full name"
                 required
             >
             <label for="card-number">Enter card number</label>
@@ -111,7 +110,8 @@ function getModalPaymentForm(){
                 type="text" 
                 name="card-number" 
                 id="card-number" 
-                pattern="[0-9]{26}
+                pattern="[0-9]{26}"
+                title="26 digits only"
                 required
             >
             <label for="cvv">Enter CVV</label>
@@ -120,6 +120,7 @@ function getModalPaymentForm(){
                 name="cvv" 
                 id="cvv"
                 pattern="[0-9]{3}"
+                title="3 digits only"
             >
             <button type="submit" class="green-btn" id="pay-btn">Pay</button>
         </form>
@@ -145,9 +146,12 @@ function payOrder(){
 
 function getSummary(){
     let resultHtml = ""
-    resultHtml = `
-        <p>Thanks ${paymentData[0].fullName}! Your order is on its way!</p>
-    `
+    if (paymentData.lenght > 0) {
+        resultHtml = `
+            <p>Thanks ${paymentData[0].fullName}! Your order is on its way!</p>
+        `
+        console.log(productBasket)
+    }
     return resultHtml
 }
 
