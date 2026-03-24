@@ -1,6 +1,7 @@
 body {
     margin: 0;
     text-align: center;
+    background-color: #F5F5F5;
 } 
 
 #banner {
@@ -8,23 +9,162 @@ body {
     height: 167px;
 }
 
+/* Products */
+.products {
+    display: flex;
+    flex-direction: column;  
+}
+
 .product {
     display: flex;
-    flex-direction: column;
+    border-bottom: 2px solid #D2D2D2;
+    margin: 30px 100px;
+    padding-bottom: 20px;
+}
+
+.product-emoji {
+    font-size: 78px;
+    margin: 0;
 }
 
 .product-properties {
     display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
 }
 
+#product-name {
+    font-size: 28px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+#product-ingredients {
+    font-size: 16px;
+    color: #8B8B8B;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#product-price {
+    font-size: 20ox;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.plus-btn {
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    padding: 0;
+    border-radius: 25px;
+    border: 1px solid #DEDEDE;
+    background-color: #F5F5F5;
+}
+
+/* Orders  */
 #orders {
     display: none;
+    flex-direction: column;
+    margin: 30px 100px;
+}
+
+.order-products-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-product-name-and-btn {
+    display: flex;
+}
+
+.order-product {
+    display: flex;
+    justify-content:space-between;
+}
+
+#orders p {
+    font-size: 28px;
+}
+
+.remove-btns{
+    background: none;
+    border: none;
+    font-style: italic;
+    color: #BBBBBB;
+    margin-left: 15px;
+}
+
+.total-price {
+    display: flex;
+    justify-content:space-between;
+    border-top: 1px solid black;
+}
+
+.green-btn{
+    padding: 20px 200px;
+    background-color: #16DB99;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Modal Payment Form */
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 540px;
+    width: 520px;
+    border-radius: 5px;
+    background-color: #F5F5F5;
+    border: 1px solid black;
+    padding-bottom: 0px;
+}
+
+#modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 40px;
 }
 
 #modal-payment-form {
     display: none;
+    flex-direction: column;
 }
 
+#payment-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+#payment-form input {
+    margin-bottom: 20px;
+}
+
+.modal-input {
+    font-size: 20px;
+    font-weight: normal;
+    padding: 20px 200px 20px 20px;
+}
+
+#pay-btn {
+    margin-top: 20px;
+    padding: 20px 160px;
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px 220px;
+}
+
+/* Summary */
 #summary {
     display: none;
 }

@@ -2,6 +2,7 @@ import { menuArray } from './data.js'
 
 const products = document.getElementById('products')
 const orders = document.getElementById('orders')
+const ordersBody = document.getElementById('orders-body')
 const modalPaymentForm = document.getElementById('modal-payment-form')
 const summary = document.getElementById('summary')
 
@@ -44,14 +45,15 @@ function getProducts(){
     menuArray.forEach(element => {
         resultHtml += `        
         <div class="product">
-            ${element.emoji}
+            <span class="product-emoji">
+                ${element.emoji}
+            </span>
             <div class="product-properties">
-                <p>${element.name}</p>
-                <p>${element.ingredients}</p>
-                <p>${element.price}</p>
+                <p id="product-name">${element.name}</p>
+                <p id="product-ingredients">${element.ingredients}</p>
+                <p id="product-price">${element.price}</p>
             </div>
             <button class="plus-btn" id="${element.id}">+</button>
-            <hr>
         </div>`
     })
     return resultHtml
@@ -69,10 +71,14 @@ function getOrders(){
     let totalPrice = 0
     let ordersHtml = "" 
     productBasket.forEach(productOrder => {
-        ordersHtml += `        
-        <p>${productOrder.name}</p>
-        <button id="remove-btn-${productOrder.id}">remove</button>
-        <p>${productOrder.price}</p>
+        ordersHtml += `
+        <div class="order-product"> 
+            <div class="order-product-name-and-btn">       
+                <p>${productOrder.name}</p>
+                <button class="remove-btns" id="remove-btn-${productOrder.id}">remove</button>
+            </div>
+            <p>${productOrder.price}</p>
+        </div>
         `
         totalPrice += Number(productOrder.price)
     })
@@ -80,13 +86,16 @@ function getOrders(){
         orders.style.display = 'flex'
     }
     const resultHtml = `
-        <p>Your Order</p>
-        ${ordersHtml}}
-        <hr>
-        <p>In Total:</p>
-        <p>${totalPrice}</p>
-        <button class="green-btn" id="order-btn">Complete Order</button>
-    `
+            <p class="order-list-element">Your Order</p>
+            <div class="order-products-list">
+                ${ordersHtml}
+            </div>
+            <div class="total-price">
+                <p>Total price:</p>
+                <p>${totalPrice}</p>
+            </div>
+            <button class="green-btn order-tbl-element" id="order-btn">Complete Order</button>
+    `   
     return resultHtml
 }
 
@@ -94,33 +103,36 @@ function getModalPaymentForm(){
     modalPaymentForm.style.display = 'flex'
     let resultHtml = ""
     resultHtml = `
-        <p>Enter Card Details</p>
+        <p id="modal-title" >Enter Card Details</p>
         <form id="payment-form">
-            <label for="full-name">Enter your name</label>
             <input 
+                class="modal-input"
                 type="text" 
                 name="full-name" 
                 id="full-name" 
                 pattern="^[A-Za-z]+ [A-Za-z]+$"
                 title="Full name"
+                placeholder="Enter your name"
                 required
             >
-            <label for="card-number">Enter card number</label>
             <input 
+                class="modal-input"
                 type="text" 
                 name="card-number" 
                 id="card-number" 
                 pattern="[0-9]{26}"
                 title="26 digits only"
+                placeholder="Enter card number"
                 required
             >
-            <label for="cvv">Enter CVV</label>
             <input 
+                class="modal-input"
                 type="text" 
                 name="cvv" 
                 id="cvv"
                 pattern="[0-9]{3}"
                 title="3 digits only"
+                placeholder="Enter CVV"
             >
             <button type="submit" class="green-btn" id="pay-btn">Pay</button>
         </form>
@@ -141,7 +153,9 @@ function payOrder(){
 
     console.log(paymentData)
 
-    summary.style.display = 'flex'
+    // summary.style.display = 'flex'
+    // render()
+    getSummary()
 }
 
 function getSummary(){
@@ -150,7 +164,8 @@ function getSummary(){
         resultHtml = `
             <p>Thanks ${paymentData[0].fullName}! Your order is on its way!</p>
         `
-        console.log(productBasket)
+        console.log(resultHtml)
+        summary.style.display = 'flex'
     }
     return resultHtml
 }
