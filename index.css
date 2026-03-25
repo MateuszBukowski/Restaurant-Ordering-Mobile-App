@@ -59,7 +59,8 @@ main {
 .plus-btn {
     height: 50px;
     width: 50px;
-    margin: auto;
+    margin: auto 10px auto auto;
+    /* align-self: center; */
     padding: 0;
     border-radius: 25px;
     border: 1px solid #DEDEDE;

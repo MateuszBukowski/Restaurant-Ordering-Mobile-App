@@ -20,13 +20,16 @@ document.addEventListener('click', function(e){
             productBasket.push(menuArray[e.target.id])
             break
         case 'remove-btn-0':
-            removeProductFromOrder("0")
+            // removeProductFromOrder("0")
+            console.log("Working remove btn: " + e.target.id)
             break
         case 'remove-btn-1':
-            removeProductFromOrder("1")
+            // removeProductFromOrder("1")
+            console.log("Working remove btn: " + e.target.id)
             break
         case 'remove-btn-2':
-            removeProductFromOrder("2")
+            // removeProductFromOrder("2")
+            console.log("Working remove btn: " + e.target.id)
             break
         case 'order-btn':
             getModalPaymentForm()
@@ -41,6 +44,8 @@ document.addEventListener('submit', function(e){
 })
 
 function getProducts(){
+    // cleanData()
+
     let resultHtml = ""
     menuArray.forEach(element => {
         resultHtml += `        
@@ -162,6 +167,7 @@ function getSummary(){
         orders.innerHTML = `
             <p>Thanks ${paymentData[0].fullName}! Your order is on its way!</p>
         `
+        cleanData()
     }
 }
 
@@ -174,6 +180,11 @@ function cleanModalForm(){
 
 function cleanOrder(){
     orders.innerHTML = ""
+}
+
+function cleanData(){
+    productBasket = []
+    paymentData = []
 }
 
 function render(){
