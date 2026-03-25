@@ -51,7 +51,7 @@ function getProducts(){
             <div class="product-properties">
                 <p id="product-name">${element.name}</p>
                 <p id="product-ingredients">${element.ingredients}</p>
-                <p id="product-price">${element.price}</p>
+                <p id="product-price">$${element.price}</p>
             </div>
             <button class="plus-btn" id="${element.id}">+</button>
         </div>`
@@ -77,7 +77,7 @@ function getOrders(){
                 <p>${productOrder.name}</p>
                 <button class="remove-btns" id="remove-btn-${productOrder.id}">remove</button>
             </div>
-            <p>${productOrder.price}</p>
+            <p>$${productOrder.price}</p>
         </div>
         `
         totalPrice += Number(productOrder.price)
@@ -92,7 +92,7 @@ function getOrders(){
             </div>
             <div class="total-price">
                 <p>Total price:</p>
-                <p>${totalPrice}</p>
+                <p>$${totalPrice}</p>
             </div>
             <button class="green-btn order-tbl-element" id="order-btn">Complete Order</button>
     `   
