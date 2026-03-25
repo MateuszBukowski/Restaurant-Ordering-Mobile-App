@@ -2,9 +2,7 @@ import { menuArray } from './data.js'
 
 const products = document.getElementById('products')
 const orders = document.getElementById('orders')
-const ordersBody = document.getElementById('orders-body')
 const modalPaymentForm = document.getElementById('modal-payment-form')
-const summary = document.getElementById('summary')
 
 let productBasket = []
 let paymentData = []
@@ -33,11 +31,13 @@ document.addEventListener('click', function(e){
         case 'order-btn':
             getModalPaymentForm()
             break
-        case 'pay-btn':
-            payOrder()
-            break
     }
     render()
+})
+
+document.addEventListener('submit', function(e){
+    e.preventDefault()
+    payOrder()
 })
 
 function getProducts(){
@@ -152,28 +152,33 @@ function payOrder(){
     })
 
     console.log(paymentData)
-
-    // summary.style.display = 'flex'
-    // render()
     getSummary()
 }
 
 function getSummary(){
-    let resultHtml = ""
-    if (paymentData.lenght > 0) {
-        resultHtml = `
+    if (paymentData.length > 0) {
+        cleanModalForm()
+        cleanOrder()
+        orders.innerHTML = `
             <p>Thanks ${paymentData[0].fullName}! Your order is on its way!</p>
         `
-        console.log(resultHtml)
-        summary.style.display = 'flex'
     }
-    return resultHtml
+}
+
+function cleanModalForm(){
+    document.getElementById('full-name').value = ""
+    document.getElementById('card-number').value = ""
+    document.getElementById('cvv').value = ""
+    modalPaymentForm.style.display = 'none'
+}
+
+function cleanOrder(){
+    orders.innerHTML = ""
 }
 
 function render(){
     products.innerHTML = getProducts()
     orders.innerHTML = getOrders()
-    summary.innerHTML = getSummary()
 }
 
 render()
